@@ -1,14 +1,29 @@
-const loadAllAi=()=>{
+let fetchdata=[];
+const loadAllAi=(dataLimit)=>{
     fetch(`https://openapi.programming-hero.com/api/ai/tools`)
     .then(res=>res.json())
-    .then(data=>showAllAi(data.data.tools));
+    .then(data=>{
+
+        fetchdata=data.data.tools;
+        // showAllAi(data.data.tools.slice(0,6),dataLimit);
+        showAllAi(data.data.tools,dataLimit);
+    });
 }
-const showAllAi=data=>{
-    // console.log(data);
+const showAllAi=(data,dataLimit)=>{
+    console.log(dataLimit);
     const aiContainer = document.getElementById('ai-container');
+    aiContainer.innerHTML='';
+    const showMore = document.getElementById('showMore')
+    if(dataLimit &&  data.length > 6){
+        
+        data=data.slice(0,6);
+        showMore.classList.remove('hidden')
+    }else{
+        showMore.classList.add('hidden');
+    }
     data.forEach(allAi =>{
         console.log(allAi);
-        const {image,features,published_in,name        }=allAi;
+        const {image,features,published_in,name}= allAi;
         const div = document.createElement('div');
 
         div.classList.add('card-body');
@@ -28,14 +43,15 @@ const showAllAi=data=>{
         <i class="fa-solid fa-arrow-right"></i>
         </div>
         </div>
-      
-      
-   
         `
         aiContainer.appendChild(div);
     });
 
-
-
 }
-loadAllAi();
+const showAllAiTogether=()=>{
+    showAllAi(fetchdata);
+   
+}
+
+
+loadAllAi(6);
