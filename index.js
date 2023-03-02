@@ -15,9 +15,9 @@ const showAllAi=data=>{
         div.innerHTML=`
     <figure><img src="${image}"/></figure>
         <h2 class="card-title text-2xl">Feature</h2>
-        <p>1.${features[0]}</p>
-        <p>2.${features[1]}</p>
-        <p class="mb-5">3.${features[2]}</p>
+        <p>1.${features[0]?features[0]:"No Data Found"}</p>
+        <p>2.${features[1]?features[1]:"No Data Found"}</p>
+        <p class="mb-5">3.${features[2]?features[2]:"No Data Found"}</p>
         <hr class="mb-3">
         <div class="flex justify-between ">
         <div> 
