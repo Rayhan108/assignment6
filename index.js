@@ -1,3 +1,4 @@
+
 let fetchdata=[];
 const loadAllAi=(dataLimit)=>{
     fetch(`https://openapi.programming-hero.com/api/ai/tools`)
@@ -5,11 +6,12 @@ const loadAllAi=(dataLimit)=>{
     .then(data=>{
 
         fetchdata=data.data.tools;
-        // showAllAi(data.data.tools.slice(0,6),dataLimit);
         showAllAi(data.data.tools,dataLimit);
     });
 }
 const showAllAi=(data,dataLimit)=>{
+    // spiner start
+    toggleLoader(true)
     console.log(dataLimit);
     const aiContainer = document.getElementById('ai-container');
     aiContainer.innerHTML='';
@@ -45,6 +47,8 @@ const showAllAi=(data,dataLimit)=>{
         </div>
         `
         aiContainer.appendChild(div);
+        // spiner end
+        toggleLoader(false);
     });
 
 }
@@ -52,6 +56,16 @@ const showAllAiTogether=()=>{
     showAllAi(fetchdata);
    
 }
+//  spinner-------------------------------
+const loader = document.getElementById('loader');
+ const toggleLoader =isloading=>{
+    if(isloading){
+loader.classList.remove('hidden')
+    }else{
+        loader.classList.add('hidden');
+    }
+ }
+
 
 
 loadAllAi(6);
