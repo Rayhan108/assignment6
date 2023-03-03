@@ -99,6 +99,7 @@ const displaySingleAiDetails=(singleAi)=>{
             </div>
             <div class="flex gap-10 ">
                 <div>
+                
                     <h1 class="text-2xl font-bold mb-5 mt-5">Features</h1>
                     <li>${features[1]?features[1].feature_name:"no data found"}</li>
                     <li>${features[2]?features[2].feature_name:"no data found"}</li>
@@ -114,6 +115,8 @@ const displaySingleAiDetails=(singleAi)=>{
         </div>
         <div>
         <figure><img src="${image_link?image_link[0]:"no image found"}"/></figure>
+        <h1 class="text-xl font-semibold ">${input_output_examples?input_output_examples[0].input:input_output_examples[1].input}</h1>
+        <p>${input_output_examples?input_output_examples[0].output:input_output_examples[1].output}</p>
         </div>
     </div>
      
