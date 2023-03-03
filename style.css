@@ -6,19 +6,20 @@ line-height: 19px;
 align-items: center;
 text-align: center;
 width: 100px;
-height: 100px;
+height: 115px;
 padding: 7px;
+justify-content: center;
+align-items: center;
+text-align: center;
+
 
 
 color: #03A30A;
 
 }
 
-/* #modal-info{
-   
-max-width: 1246px;
-height: 763px;
-
-background: #FFFFFF;
-border-radius: 16px;
-} */
+#badge{
+    position: relative;
+    right:100px;
+    top: -70px;
+}

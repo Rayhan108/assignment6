@@ -66,7 +66,7 @@ loader.classList.remove('hidden')
     }
  }
 
-//  fetch details API
+//  fetch details API for modal
 
 const aiDetails =id=>{
     const URL =`https://openapi.programming-hero.com/api/ai/tool/${id}`
@@ -77,9 +77,10 @@ const aiDetails =id=>{
         displaySingleAiDetails(data.data)
     });
 }
+// display modal
 const displaySingleAiDetails=(singleAi)=>{
     console.log(singleAi);
-    const {description,pricing,features,integrations,input_output_examples,image_link} =singleAi;
+    const {description,pricing,features,integrations,input_output_examples,image_link,accuracy} =singleAi;
 
     const modalInfo = document.getElementById('modal');
    const modalDetails=`
@@ -92,14 +93,16 @@ const displaySingleAiDetails=(singleAi)=>{
             <h1 class="font-bold text-2xl">${description}</h1>
             <div class="flex gap-5  overflow-hidden ">
                  
-                <div  class="modal-body  shadow-xl py-10"><p class="text-center content-center">${pricing?pricing[0].price:"free of cost"}/<br>${pricing?pricing[0].plan:"Basic"}</p></div>
-                <div  class="modal-body  shadow-xl py-10"><p class="text-center content-center">${pricing?pricing[1].price:"free of cost"}/<br>${pricing?pricing[1].plan:"Pro"}</p></div>
-                <div class="modal-body  shadow-xl py-10"><p  class="text-center content-center">${pricing?pricing[2].price :"free of cost"}/<br>${pricing?pricing[2].plan:"Enterprice"}</p></div>
+                <div  class="modal-body  shadow-xl py-10"><p >${pricing?pricing[0].price:"free of cost"}/<br>${pricing?pricing[0].plan:"Basic"}</p></div>
+                <div  class="modal-body  shadow-xl py-10"><p >${pricing?pricing[1].price:"free of cost"}/<br>${pricing?pricing[1].plan:"Pro"}</p></div>
+                <div class="modal-body  shadow-xl py-10"><p  >${pricing?pricing[2].price :"free of cost"}/<br>${pricing?pricing[2].plan:"Enterprice"}</p></div>
             </div>
             <div class="flex gap-10 ">
                 <div>
                 
                     <h1 class="text-2xl font-bold mb-5 mt-5">Features</h1>
+                    <ul id="features-container"></ul>
+                    
                     <li>${features[1]?features[1].feature_name:"no data found"}</li>
                     <li>${features[2]?features[2].feature_name:"no data found"}</li>
                     <li>${features[3]?features[3].feature_name:"no data found"}</li>
@@ -109,13 +112,18 @@ const displaySingleAiDetails=(singleAi)=>{
                     <li>${integrations ?integrations[0]:"no data found"}</li>
                     <li>${integrations ?integrations[1]:"no data found"}</li>
                     <li>${integrations ?integrations[2]:"no data found"}</li>
+               
+                 
                 </div>
             </div>
         </div>
         <div>
         <div class="card w-96 bg-base-100 shadow-xl">
         <figure class="px-10 pt-10">
-          <img src="${image_link?image_link[0]:"no image found"}" class="rounded-xl" />
+          <img  src="${image_link?image_link[0]:"no image found"}" class="rounded-xl"/>
+          <div id="badge" class="badge badge-secondary hidden">${accuracy.score*100}%accuracy</div>
+          
+
         </figure>
         <div class="card-body items-center text-center">
         <h1 class="text-xl font-semibold ">${input_output_examples?input_output_examples[0].input:"Can you give any example?"}</h1>
@@ -129,7 +137,18 @@ const displaySingleAiDetails=(singleAi)=>{
 </div>
     `;
     modalInfo.innerHTML=modalDetails;
+// accuracy condition
+    const badge=document.getElementById('badge');
+    if(accuracy.score=== null){
+        badge.classList.add('hidden');
+    }else{
+        badge.classList.remove('hidden');
+    }
 
+    // const featuresContainer = document.getElementById('features-container');
+    // const FeatureList =features.forin(featureData=>{
+    //     console.log(featureData);
+    // })
    
 }
 
