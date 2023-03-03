@@ -73,44 +73,54 @@ const aiDetails =id=>{
     const URL =`https://openapi.programming-hero.com/api/ai/tool/${id}`
     fetch(URL)
     .then(res=>res.json())
-    .then(data=>displaySingleAiDetails(data.data));
+    .then(data=>{
+        console.log(data)
+        displaySingleAiDetails(data.data)
+    });
 }
 const displaySingleAiDetails=(singleAi)=>{
     console.log(singleAi);
     const {description,pricing,features,integrations,input_output_examples,image_link} =singleAi;
-    const container = document.getElementById("modal-info");
-    const div = document.createElement("div");
-    div.classList.add("modal");
-    div.innerHTML = `
-    
-    <div class="modal-box relative">
-    <label
-      for="my-modal-3"
-      class="btn btn-sm btn-circle absolute right-2 top-2"
-      >✕</label
-    >
-    <div class="flex">
-    <div>
-    <p>${description}</p>
-    <h2 class="card-title text-2xl">Feature</h2>
-    <p></p>
-    <p class="mb-5"></p>
-    <hr class="mb-3">
-    <div class="flex justify-between ">
-    <div> 
-     <h2 class="card-title text-2xl mb-3"></h2>
-    <i class="fa-sharp fa-regular fa-calendar-days text-sm"></i>
-    </div>
-    </div>
-    <div>
-    <figure><img src="${image_link[0]}"/></figure>
-    </div>
-</div>
 
-  </div>
+    const modalInfo = document.getElementById('modal');
+   const modalDetails=`
+   
+      <div class="modal-box relative">
+        <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+        <div  class="flex p-5 m-5 py-5 gap-10 ">
+        <div class="bg-red-50 py-5 px-5">
+    
+            <h1 class="font-bold text-2xl">${description}</h1>
+            <div class="flex gap-5  overflow-hidden ">
+                 
+                <div  class="modal-body  shadow-xl py-10"><p class="text-center content-center">${pricing?pricing[0].price:"free of cost"}/<br>${pricing?pricing[0].plan:"free of cost"}</p></div>
+                <div  class="modal-body  shadow-xl py-10"><p class="text-center content-center">${pricing?pricing[1].price:"free of cost"}/<br>${pricing?pricing[1].plan:"free of cost"}</p></div>
+                <div class="modal-body  shadow-xl py-10"><p  class="text-center content-center">${pricing?pricing[2].price :"free of cost"}/<br>${pricing?pricing[2].plan:"free of cost"}</p></div>
+            </div>
+            <div class="flex gap-10 ">
+                <div>
+                    <h1 class="text-2xl font-bold mb-5 mt-5">Features</h1>
+                    <li>${features[1]?features[1].feature_name:"no data found"}</li>
+                    <li>${features[2]?features[2].feature_name:"no data found"}</li>
+                    <li>${features[3]?features[3].feature_name:"no data found"}</li>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold mb-5 mt-5">Integrations</h1>
+                    <li>${integrations ?integrations[0]:"no data found"}</li>
+                    <li>${integrations ?integrations[1]:"no data found"}</li>
+                    <li>${integrations ?integrations[2]:"no data found"}</li>
+                </div>
+            </div>
+        </div>
+        <div>
+        <figure><img src="${image_link?image_link[0]:"no image found"}"/></figure>
+        </div>
+    </div>
+     
+</div>
     `;
-    container.appendChild(div);
- 
+    modalInfo.innerHTML=modalDetails;
+
    
 }
 

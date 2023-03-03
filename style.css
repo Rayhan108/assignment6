@@ -1,0 +1,25 @@
+.modal-body{
+    font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 19px;
+align-items: center;
+text-align: center;
+width: 100px;
+height: 100px;
+padding: 7px;
+
+
+color: #03A30A;
+
+}
+
+#modal-info{
+   
+max-width: 1246px;
+height: 763px;
+/* max-width: 80% ; */
+
+background: #FFFFFF;
+border-radius: 16px;
+}
