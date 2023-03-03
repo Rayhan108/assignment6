@@ -1,4 +1,3 @@
-
 let fetchdata=[];
 const loadAllAi=(dataLimit)=>{
     fetch(`https://openapi.programming-hero.com/api/ai/tools`)
@@ -93,9 +92,9 @@ const displaySingleAiDetails=(singleAi)=>{
             <h1 class="font-bold text-2xl">${description}</h1>
             <div class="flex gap-5  overflow-hidden ">
                  
-                <div  class="modal-body  shadow-xl py-10"><p class="text-center content-center">${pricing?pricing[0].price:"free of cost"}/<br>${pricing?pricing[0].plan:"free of cost"}</p></div>
-                <div  class="modal-body  shadow-xl py-10"><p class="text-center content-center">${pricing?pricing[1].price:"free of cost"}/<br>${pricing?pricing[1].plan:"free of cost"}</p></div>
-                <div class="modal-body  shadow-xl py-10"><p  class="text-center content-center">${pricing?pricing[2].price :"free of cost"}/<br>${pricing?pricing[2].plan:"free of cost"}</p></div>
+                <div  class="modal-body  shadow-xl py-10"><p class="text-center content-center">${pricing?pricing[0].price:"free of cost"}/<br>${pricing?pricing[0].plan:"Basic"}</p></div>
+                <div  class="modal-body  shadow-xl py-10"><p class="text-center content-center">${pricing?pricing[1].price:"free of cost"}/<br>${pricing?pricing[1].plan:"Pro"}</p></div>
+                <div class="modal-body  shadow-xl py-10"><p  class="text-center content-center">${pricing?pricing[2].price :"free of cost"}/<br>${pricing?pricing[2].plan:"Enterprice"}</p></div>
             </div>
             <div class="flex gap-10 ">
                 <div>
@@ -114,9 +113,16 @@ const displaySingleAiDetails=(singleAi)=>{
             </div>
         </div>
         <div>
-        <figure><img src="${image_link?image_link[0]:"no image found"}"/></figure>
-        <h1 class="text-xl font-semibold ">${input_output_examples?input_output_examples[0].input:input_output_examples[1].input}</h1>
-        <p>${input_output_examples?input_output_examples[0].output:input_output_examples[1].output}</p>
+        <div class="card w-96 bg-base-100 shadow-xl">
+        <figure class="px-10 pt-10">
+          <img src="${image_link?image_link[0]:"no image found"}" class="rounded-xl" />
+        </figure>
+        <div class="card-body items-center text-center">
+        <h1 class="text-xl font-semibold ">${input_output_examples?input_output_examples[0].input:"Can you give any example?"}</h1>
+        <p>${input_output_examples?input_output_examples[0].output:"No! Not Yet! Take a break!!!"}</p>
+          
+        </div>
+      </div>
         </div>
     </div>
      
@@ -129,3 +135,5 @@ const displaySingleAiDetails=(singleAi)=>{
 
 
 loadAllAi(6);
+
+
