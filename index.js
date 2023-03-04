@@ -85,7 +85,7 @@ const displaySingleAiDetails=(singleAi)=>{
     const modalInfo = document.getElementById('modal');
    const modalDetails=`
    
-      <div class="modal-box relative">
+      <div style="width:100%;" class="modal-box relative">
         <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
         <div  class="flex p-5 m-5 py-5 gap-10 ">
         <div class="bg-red-50 py-5 px-5">
@@ -102,14 +102,12 @@ const displaySingleAiDetails=(singleAi)=>{
                 
                     <h1 class="text-2xl font-bold mb-5 mt-5">Features</h1>
                     <ul id="features-container"></ul>
-                
+           
                 </div>
                 <div>
                     <h1 class="text-2xl font-bold mb-5 mt-5">Integrations</h1>
-              
-                    <li>${integrations ?integrations[0]:"no data found"}</li>
-                    <li>${integrations ?integrations[1]:"no data found"}</li>
-                    <li>${integrations ?integrations[2]:"no data found"}</li>
+                    <ul id="integration-container"></ul>
+               
                  
                 </div>
             </div>
@@ -143,19 +141,31 @@ const displaySingleAiDetails=(singleAi)=>{
     }
 
    // integration
-    // const integrationContainer = document.getElementById('integration-container');
-    // const integration =integrations.forEach(integrationData=>{
-    //   const li=document.createElement('li');
-    //   li.innerHTML+=`<li>${integrationData ? integrationData:"no data found"}</li>`;
-    //     integrationContainer.appendChild(li);
-    // })
-// features
-    const feautureContainer = document.getElementById('features-container');
 
-    for(const key in features){
-        console.log(key,features[key].feature_name);
-        feautureContainer.innerHTML +=`<li>${key,features[key].feature_name}</li>`
-    }
+const integrationContainer = document.getElementById('integration-container');
+
+if(integrations === null){
+
+    integrationContainer.innerHTML = 'No data found.';
+} else {
+    const integration=integrations.forEach(integrationData=>{
+        const li=document.createElement('li');
+        li.innerHTML+=`<li>${integrationData ? integrationData:"no data found"}</li>`;
+        integrationContainer.appendChild(li);
+      });
+}
+
+// // features
+const feautureContainer = document.getElementById('features-container');
+
+for(const key in features){
+    console.log(key,features[key].feature_name);
+    feautureContainer.innerHTML +=`<li>${key,features[key].feature_name}</li>`
+}
+
+
+
+
 }
 
 

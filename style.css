@@ -23,3 +23,7 @@ color: #03A30A;
     right:100px;
     top: -70px;
 }
+
+#modal{
+    width: 100% !important;
+}
