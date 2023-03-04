@@ -1,5 +1,7 @@
 let fetchdata=[];
 const loadAllAi=(dataLimit)=>{
+    // spiner start
+    toggleLoader(true)
     fetch(`https://openapi.programming-hero.com/api/ai/tools`)
     .then(res=>res.json())
     .then(data=>{
@@ -9,8 +11,6 @@ const loadAllAi=(dataLimit)=>{
     });
 }
 const showAllAi=(data,dataLimit)=>{
-    // spiner start
-    toggleLoader(true)
     // console.log(dataLimit);
     const aiContainer = document.getElementById('ai-container');
     aiContainer.innerHTML='';
@@ -102,17 +102,14 @@ const displaySingleAiDetails=(singleAi)=>{
                 
                     <h1 class="text-2xl font-bold mb-5 mt-5">Features</h1>
                     <ul id="features-container"></ul>
-                    
-                    <li>${features[1]?features[1].feature_name:"no data found"}</li>
-                    <li>${features[2]?features[2].feature_name:"no data found"}</li>
-                    <li>${features[3]?features[3].feature_name:"no data found"}</li>
+                
                 </div>
                 <div>
                     <h1 class="text-2xl font-bold mb-5 mt-5">Integrations</h1>
+              
                     <li>${integrations ?integrations[0]:"no data found"}</li>
                     <li>${integrations ?integrations[1]:"no data found"}</li>
                     <li>${integrations ?integrations[2]:"no data found"}</li>
-               
                  
                 </div>
             </div>
@@ -145,14 +142,22 @@ const displaySingleAiDetails=(singleAi)=>{
         badge.classList.remove('hidden');
     }
 
-    // const featuresContainer = document.getElementById('features-container');
-    // const FeatureList =features.forin(featureData=>{
-    //     console.log(featureData);
+   // integration
+    // const integrationContainer = document.getElementById('integration-container');
+    // const integration =integrations.forEach(integrationData=>{
+    //   const li=document.createElement('li');
+    //   li.innerHTML+=`<li>${integrationData ? integrationData:"no data found"}</li>`;
+    //     integrationContainer.appendChild(li);
     // })
-   
+// features
+    const feautureContainer = document.getElementById('features-container');
+
+    for(const key in features){
+        console.log(key,features[key].feature_name);
+        feautureContainer.innerHTML +=`<li>${key,features[key].feature_name}</li>`
+    }
 }
 
 
 loadAllAi(6);
-
 
